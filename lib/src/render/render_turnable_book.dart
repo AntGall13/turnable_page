@@ -479,7 +479,7 @@ class RenderTurnableBook extends RenderBox
       );
     }
     if (settings.drawShadow) {
-     // _drawBookShadow(canvas, rect, offset);
+      _drawBookShadow(canvas, rect, offset);
     }
     if (flippingPage is BookPageImpl) {
       _paintDynamicPage(context, canvas, offset, flippingPage as BookPageImpl);
