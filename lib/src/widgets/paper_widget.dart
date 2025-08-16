@@ -38,21 +38,9 @@ class PaperWidget extends StatelessWidget {
     return Container(
       width: size.width,
       height: size.height,
-      padding: effectivePadding,
-      decoration: _buildOuterDecoration(),
-      child: Container(
-        padding: effectivePadding,
-        decoration: _buildMiddleDecoration(),
-        child: Container(
-          padding: effectivePadding,
-          decoration: _buildInnerDecoration(),
-          child: Container(
-            clipBehavior: Clip.hardEdge,
-            decoration: _buildFinalDecoration(),
-            child: child,
-          ),
-        ),
-      ),
+      clipBehavior: Clip.hardEdge,
+      decoration: _buildFinalDecoration(),
+      child: child,
     );
   }
 
