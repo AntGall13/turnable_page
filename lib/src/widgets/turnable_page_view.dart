@@ -77,6 +77,7 @@ class _TurnablePageViewState extends State<TurnablePageView> {
   Widget build(BuildContext context) {
     return PaperWidget(
       size: widget.bookSize,
+      padding: EdgeInsets.zero,
       isSinglePage: widget.settings.usePortrait,
       paperBoundaryDecoration: widget.paperBoundaryDecoration,
       child: TurnableBookRenderObjectWidget(
