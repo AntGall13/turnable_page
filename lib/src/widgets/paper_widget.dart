@@ -38,8 +38,8 @@ class PaperWidget extends StatelessWidget {
     return Container(
       width: size.width,
       height: size.height,
-      clipBehavior: Clip.hardEdge,
-      decoration: _buildFinalDecoration(),
+      // clipBehavior: Clip.hardEdge,
+      // decoration: _buildFinalDecoration(),
       child: child,
     );
   }

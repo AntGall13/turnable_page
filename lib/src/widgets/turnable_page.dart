@@ -30,7 +30,7 @@ class TurnablePage extends StatelessWidget {
     this.autoResponseSize = true,
     this.paperBoundaryDecoration = PaperBoundaryDecoration.vintage,
     FlipSettings? settings,
-  }) : settings = settings ?? FlipSettings() {
+  }) : settings = settings ?? FlipSettings(whitePageColor: Colors.white) {
     if (settings != null) {
       assert(
         this.settings.startPageIndex >= 0,

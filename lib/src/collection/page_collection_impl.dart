@@ -106,7 +106,8 @@ class PageCollectionImpl extends PageCollection {
     final current = currentSpreadIndex;
     if (render.getOrientation() == BookOrientation.portrait) {
       return direction == FlipDirection.forward
-          ? pages[current].getTemporaryCopy()
+          // ? pages[current].getTemporaryCopy()
+          ? BookPageImpl(index: pageCount-1, createdDensity: PageDensity.hard)
           : pages[current - 1];
     } else {
       final spread = direction == FlipDirection.forward

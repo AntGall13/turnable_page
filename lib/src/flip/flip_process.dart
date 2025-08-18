@@ -103,7 +103,6 @@ class FlipProcess {
       final pageCollection = app.getPageCollection();
       flippingPage = pageCollection?.getFlippingPage(direction);
       bottomPage = pageCollection?.getBottomPage(direction);
-
       if (render.getOrientation() == BookOrientation.landscape) {
         if (direction == FlipDirection.back) {
           final nextPage = pageCollection?.nextBy(flippingPage!);
@@ -146,7 +145,6 @@ class FlipProcess {
     if (calc!.calc(pagePos)) {
       final progress = calc!.getFlippingProgress();
       final settings = app.getSettings;
-
       bottomPage?.setArea(calc!.getBottomClipArea());
       bottomPage?.setPosition(calc!.getBottomPagePosition());
       bottomPage?.setAngle(0);

@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+
 import '../enums/size_type.dart';
 
 /// Configuration object for PageFlip widget behavior and appearance
@@ -72,7 +76,12 @@ class FlipSettings {
   /// Bend strength multiplier (0-1) influencing hardAngle easing
   final double bendStrength;
 
-  FlipSettings({
+
+  final Color whitePageColor;
+
+  FlipSettings( {
+    this.whitePageColor = Colors.white,
+
     /// Initial page to display (0-based). Default: 0 (first page)
     this.startPageIndex = 0,
 
@@ -183,6 +192,7 @@ class FlipSettings {
       inertiaProgressBoost: inertiaProgressBoost ?? this.inertiaProgressBoost,
       sagAmplitude: sagAmplitude ?? this.sagAmplitude,
       bendStrength: bendStrength ?? this.bendStrength,
+      whitePageColor: this.whitePageColor,
     );
   }
 }

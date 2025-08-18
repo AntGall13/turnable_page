@@ -48,6 +48,7 @@ class FlipCalculation {
     bool clipBottom = false;
 
     result.add(rect.topLeft);
+
     if (topIntersectPoint != null) {
       result.add(topIntersectPoint!);
     }
@@ -92,15 +93,21 @@ class FlipCalculation {
       if (Helper.getDistanceBetweenTwoPoint(
         sideIntersectPoint!,
         topIntersectPoint!,
-      ) >=
-          10) {
+      ) >= 4) {
         result.add(sideIntersectPoint!);
+      }
+    } else if (sideIntersectPoint != null && topIntersectPoint == null) {
+      result.add(sideIntersectPoint!);
+
+      if (corner == FlipCorner.top) {
+        result.add(Point(pageWidth, pageHeight));
       }
     } else {
       if (corner == FlipCorner.top) {
         result.add(Point(pageWidth, pageHeight));
       }
     }
+
 
     if (bottomIntersectPoint != null) {
       result.add(bottomIntersectPoint!);
@@ -283,7 +290,6 @@ class FlipCalculation {
       width: pageWidth + 2,
       height: pageHeight + 2,
     );
-
     if (corner == FlipCorner.top) {
       topIntersectPoint = Helper.getIntersectBetweenTwoSegment(
         boundRect,
@@ -321,6 +327,7 @@ class FlipCalculation {
         Segment(Point(0, pageHeight), Point(pageWidth, pageHeight)),
       );
     }
+
   }
 
   Point checkPositionAtCenterLine(

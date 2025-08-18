@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import '../collection/page_collection_impl.dart';
@@ -27,9 +28,13 @@ class RenderTurnableBook extends RenderBox
         ContainerRenderObjectMixin<RenderBox, TurnableParentData>,
         RenderBoxContainerDefaultsMixin<RenderBox, TurnableParentData>
     implements RenderPage {
-  static const int _swipeTimeout = 250;
+  static const int _swipeTimeout = 350;
   static const double _minMoveThreshold = 10.0;
   bool get _needsWhitePage {
+    if (_orientation == BookOrientation.portrait)
+      {
+        return false;
+      }
     return settings.showCover ? false : childCount % 2 == 1;
   }
 
@@ -478,7 +483,7 @@ class RenderTurnableBook extends RenderBox
         isBottom: true,
       );
     }
-    if (settings.drawShadow) {
+    if (settings.drawShadow && _orientation == BookOrientation.landscape) {
       _drawBookShadow(canvas, rect, offset);
     }
     if (flippingPage is BookPageImpl) {
@@ -555,7 +560,7 @@ class RenderTurnableBook extends RenderBox
       canvas.rotate(angle);
     }
     final paint = Paint()
-      ..color = const Color(0xFFFFFFFF)
+      ..color = this.settings.whitePageColor
       ..style = PaintingStyle.fill;
     canvas.drawRect(Rect.fromLTWH(0, 0, rect.pageWidth, rect.height), paint);
     final borderPaint = Paint()
@@ -860,9 +865,11 @@ class RenderTurnableBook extends RenderBox
     final dx = point.x - _touchPoint!.point.x;
     final distY = (point.y - _touchPoint!.point.y).abs();
     final timeDelta = DateTime.now().millisecondsSinceEpoch - _touchPoint!.time;
-    return dx.abs() > _swipeDistance &&
-        distY < _swipeDistance * 2 &&
-        timeDelta < _swipeTimeout;
+
+    return dx.abs() > _swipeDistance //&&
+        // distY < _swipeDistance * 2 &&
+        // timeDelta < _swipeTimeout
+    ;
   }
 
   void _processSwipeGesture(model.Point point) {
@@ -894,7 +901,7 @@ class RenderTurnableBook extends RenderBox
     bool isLeft,
   ) {
     final paint = Paint()
-      ..color = const Color(0xFFFFFFFF)
+      ..color = this.settings.whitePageColor
       ..style = PaintingStyle.fill;
     final pageX = (isLeft ? rect.left : rect.left + rect.pageWidth) + offset.dx;
     final pageY = rect.top + offset.dy;
